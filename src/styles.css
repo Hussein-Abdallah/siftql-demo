@@ -6,6 +6,9 @@
   --card: #ffffff;
   --mark: #ffe9a8;
   --mark-fg: #3d2f00;
+  /* Deliberately a different hue from --mark: the two are different answers,
+     not two intensities of the same one. */
+  --whole: rgba(43, 95, 217, 0.13);
   --accent: #2b5fd9;
   --ok: #1a6c3d;
   --bad: #b3261e;
@@ -21,6 +24,7 @@
     --card: #1d1d22;
     --mark: #6b5410;
     --mark-fg: #ffeec2;
+    --whole: rgba(143, 176, 255, 0.2);
     --accent: #8fb0ff;
     --ok: #6cc48c;
     --bad: #ff938c;
@@ -184,6 +188,23 @@ pre {
 .status {
   margin: 0.7rem 0 0;
   font-size: 0.85rem;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  margin: 0.55rem 0 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--muted);
+}
+
+.legend > span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
 }
 
 .error {

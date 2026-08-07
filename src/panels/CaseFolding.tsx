@@ -3,6 +3,7 @@ import { SiftQLHighlight } from '@siftql/react-highlighter';
 
 import { ROWS } from '../data';
 import { Panel } from '../Panel';
+import { WHOLE_VALUE_STYLE } from '../marks';
 
 const QUERY = 'title:*office*';
 
@@ -45,7 +46,11 @@ export const CaseFolding = () => {
             <tr key={result.row.id}>
               <td className="mono small">{result.row.title}</td>
               <td>
-                <SiftQLHighlight text={result.row.title} spans={result.spans} />
+                <SiftQLHighlight
+                  text={result.row.title}
+                  spans={result.spans}
+                  wholeValueStyle={WHOLE_VALUE_STYLE}
+                />
               </td>
               <td className="mono small">{result.raw}</td>
             </tr>

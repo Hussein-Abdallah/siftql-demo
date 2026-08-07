@@ -1,6 +1,7 @@
 import { SiftQLHighlight } from '@siftql/react-highlighter';
 
 import { Panel } from '../Panel';
+import { WHOLE_VALUE_STYLE } from '../marks';
 
 const TEXT = 'İstanbul office rollout';
 
@@ -40,7 +41,7 @@ export const ThreeStates = () => (
           <tr key={state.prop}>
             <td className="mono small">{state.prop}</td>
             <td>
-              <SiftQLHighlight text={TEXT} spans={state.spans} />
+              <SiftQLHighlight text={TEXT} spans={state.spans} wholeValueStyle={WHOLE_VALUE_STYLE} />
             </td>
             <td className="small">{state.means}</td>
           </tr>
