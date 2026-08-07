@@ -1,0 +1,214 @@
+:root {
+  --bg: #fdfdfc;
+  --fg: #1a1a18;
+  --muted: #5c5c56;
+  --line: #e2e2dd;
+  --card: #ffffff;
+  --mark: #ffe9a8;
+  --mark-fg: #3d2f00;
+  --accent: #2b5fd9;
+  --ok: #1a6c3d;
+  --bad: #b3261e;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16161a;
+    --fg: #ececea;
+    --muted: #a0a09a;
+    --line: #2e2e34;
+    --card: #1d1d22;
+    --mark: #6b5410;
+    --mark-fg: #ffeec2;
+    --accent: #8fb0ff;
+    --ok: #6cc48c;
+    --bad: #ff938c;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+main {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.005em;
+}
+
+.lede {
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+  max-width: 58ch;
+}
+
+.versions {
+  color: var(--muted);
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  padding: 1.15rem 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.panel p {
+  max-width: 68ch;
+  color: var(--muted);
+}
+
+.panel p:last-child {
+  margin-bottom: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  display: block;
+  overflow-x: auto;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.45rem 0.7rem 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+th {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+td.num,
+th.num {
+  width: 2.5rem;
+  color: var(--muted);
+}
+
+tr.dim td {
+  opacity: 0.4;
+}
+
+mark {
+  background: var(--mark);
+  color: var(--mark-fg);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+code,
+.mono,
+pre {
+  font-family: var(--mono);
+}
+
+pre {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  color: var(--fg);
+}
+
+.small {
+  font-size: 0.82rem;
+}
+
+.query {
+  width: 100%;
+  font: 0.95rem var(--mono);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.query:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.6rem 0 0;
+}
+
+.presets button {
+  font: 0.78rem var(--mono);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.presets button:hover {
+  color: var(--fg);
+  border-color: var(--accent);
+}
+
+.status {
+  margin: 0.7rem 0 0;
+  font-size: 0.85rem;
+}
+
+.error {
+  color: var(--bad);
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.bad {
+  color: var(--bad);
+  font-weight: 600;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+
+footer a {
+  color: var(--accent);
+}
