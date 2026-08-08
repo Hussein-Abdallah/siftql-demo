@@ -8,6 +8,32 @@
       name="description"
       content="@siftql/core computes which substrings matched; @siftql/react-highlighter paints them."
     />
+
+    <!--
+      Link previews. A crawler does not run JavaScript, so these have to be in
+      the HTML shell rather than set by React — which they are, because Vite
+      serves this file statically and only mounts the app inside #root.
+
+      og:image must be ABSOLUTE. A relative path is the usual reason a card
+      comes out blank, and nothing warns you: the page still renders, and the
+      only symptom is a preview nobody sees while testing locally.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://siftql-demo.vercel.app/" />
+    <meta property="og:title" content="One character decides whether it can tell you where" />
+    <meta
+      property="og:description"
+      content="siftql reports which rows matched and which characters did. Two rows differing by one character, and only one of them can say where."
+    />
+    <meta property="og:image" content="https://siftql-demo.vercel.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="The query title:*office* against two rows. İstanbul office rollout is underlined whole and labelled matched, ranges absent. Istanbul office rollout has office marked, labelled ranges 9 to 15."
+    />
+    <meta property="og:site_name" content="siftql" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="root"></div>
