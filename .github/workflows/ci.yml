@@ -22,13 +22,13 @@ jobs:
     name: verify
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # Do not leave the token in .git/config, where any later step — or
           # anything a dependency's install script runs — could pick it up.
           persist-credentials: false
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           # One version, not a matrix. This is an application with exactly one
           # runtime — whatever Vercel builds it with — so a matrix would prove
