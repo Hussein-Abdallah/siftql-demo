@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Least privilege, stated rather than inherited. This workflow only reads the
+# tree: it publishes nothing, comments on nothing, and pushes nothing.
+# `pull_request` — NOT `pull_request_target` — is what keeps a fork's code out
+# of a context holding secrets.
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # Do not leave the token in .git/config, where any later step — or
+          # anything a dependency's install script runs — could pick it up.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v5
+        with:
+          # One version, not a matrix. This is an application with exactly one
+          # runtime — whatever Vercel builds it with — so a matrix would prove
+          # breadth nobody deploys. The packages it consumes test their own
+          # support ranges. If Vercel's build image moves, this moves with it.
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # The reason this workflow exists. Every result a panel states is asserted
+      # in test/expectations.test.ts, and nothing else runs that file: Vercel
+      # builds the page, it does not check whether the captions are true. A
+      # caption that drifts should fail here rather than go live saying
+      # something the engine no longer does.
+      - name: Test
+        run: npm test
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # Not redundant with the typecheck above. `tsc --noEmit` sees types;
+      # `vite build` resolves imports, assets and the CSS, and fails on things
+      # the type system never looks at. Vercel would catch those too, but only
+      # once a deploy is already running — this catches them on the pull request.
+      - name: Build
+        run: npm run build
