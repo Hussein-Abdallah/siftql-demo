@@ -1,0 +1,45 @@
+version: 2
+
+updates:
+  # The siftql packages are pinned to exact versions on purpose — this repo is
+  # meant to consume what the registry serves, not a range that drifts silently.
+  # An exact pin means nothing updates it, which is how the core playground ended
+  # up advertising 0.1.1 from a page shipped in the 0.1.2 release.
+  #
+  # This is the mechanism that closes that gap without anyone remembering: a
+  # publish opens a pull request, CI re-runs test/expectations.test.ts against
+  # the new build, and a release that changed behaviour a panel describes turns
+  # the PR red instead of quietly making the live page wrong.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Two groups and no ungrouped remainder, so a busy week is two pull requests
+    # rather than fifteen. The siftql bumps are kept separate because they are
+    # the ones worth reading — everything else is tooling that either builds or
+    # does not.
+    groups:
+      siftql:
+        patterns:
+          - '@siftql/*'
+      everything-else:
+        patterns:
+          - '*'
+        exclude-patterns:
+          - '@siftql/*'
+    labels:
+      - dependencies
+
+  # The workflow pins actions by major tag (actions/checkout@v5). Those move
+  # under the tag, so this is less about features than about not being the last
+  # repository still calling a version that has been retired from the runners.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns:
+          - '*'
+    labels:
+      - dependencies
