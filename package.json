@@ -14,6 +14,7 @@
   "dependencies": {
     "@siftql/core": "0.1.3",
     "@siftql/react-highlighter": "0.1.2",
+    "@vercel/analytics": "^2.0.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

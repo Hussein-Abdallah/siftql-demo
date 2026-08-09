@@ -1,3 +1,8 @@
+// `/react`, not `/next`. The export map offers an entry point per framework
+// and this is a Vite SPA; `@vercel/analytics/next` pulls Next-specific
+// runtime that does not exist here.
+import { Analytics } from '@vercel/analytics/react';
+
 import corePkg from '@siftql/core/package.json';
 import highlighterPkg from '@siftql/react-highlighter/package.json';
 
@@ -35,5 +40,12 @@ export const App = () => (
       <a href="https://github.com/Hussein-Abdallah/siftql-react-highlighter">@siftql/react-highlighter</a>
       <a href="https://hussein-abdallah.github.io/siftql/">query playground</a>
     </footer>
+
+    {/*
+      Renders nothing. It injects the beacon script and reports a pageview,
+      and it is a no-op outside a Vercel deployment, so `npm run dev` stays
+      quiet rather than logging failed requests.
+    */}
+    <Analytics />
   </main>
 );
